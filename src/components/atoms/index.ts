@@ -1,7 +1,7 @@
 
 /**
  * Export all atoms components
- * 
+ *
  * */
 
 export * from './TextInput';

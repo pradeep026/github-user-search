@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-
+import './style.scss';
 interface Props<T> {
     /**
      *  data to rendered as list

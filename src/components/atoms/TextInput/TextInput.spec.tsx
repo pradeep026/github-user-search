@@ -38,7 +38,7 @@ describe(`Tests TextInput component`, () => {
                 label={'Test'}
                 name={`test`}
                 value={inputValue}
-                onChange={onChangeCallbackFn} />
+                onValueChange={onChangeCallbackFn} />
         );
         let textInputHtmlElement = getByTestId(`text--input`);
         expect(getByLabelText(/Test/i)).toHaveAttribute(`for`, `test`);
@@ -48,5 +48,19 @@ describe(`Tests TextInput component`, () => {
         inputValue = `abc`;
         fireEvent.change(textInputHtmlElement, { target: { value: inputValue }});
         expect(onChangeCallbackFn).toHaveBeenCalled();
+    });
+
+    it(`Assert when onValueChange is not passed as prop`, () => {
+        let onChangeCallbackFn = jest.fn();
+        let inputValue = `Test`;
+        let { getByTestId } = render(
+            <TextInput
+                label={'Test'}
+                name={`test`}
+                value={inputValue}/>
+        );
+        let textInputHtmlElement = getByTestId(`text--input`);
+        fireEvent.change(textInputHtmlElement, { target: { value: `abc` }});
+        expect(onChangeCallbackFn).not.toBeCalled();
     });
 });

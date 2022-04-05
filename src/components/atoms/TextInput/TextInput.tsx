@@ -1,15 +1,21 @@
 import React from 'react';
+import { assertIsFunction } from '../../../utils';
 import { InputLabel } from './InputLabel';
 
 import './style.scss';
 
 type NativeInputProps = React.ComponentPropsWithRef<'input'>;
 
-interface Props extends NativeInputProps {
+export interface TextInputProps extends NativeInputProps {
     /**
      * Label or Text to Display on Button
      */
     label?: string;
+
+    /**
+     * onValueChange - on change callback function with input value
+     */
+    onValueChange?: (value: string) => void
 
     /**
      * custom style to override the input style
@@ -17,7 +23,13 @@ interface Props extends NativeInputProps {
     customStyle?: string;
 }
 
-export const TextInput: React.FC<Props> = ({ label, value, onChange, customStyle, name, placeholder, ...rest }) => {
+export const TextInput: React.FC<TextInputProps> =
+    ({ label, value, onValueChange, customStyle, name, placeholder, ...rest }) => {
+    const __onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        assertIsFunction(onValueChange) &&
+            onValueChange(event.target.value);
+    };
+
     return (
         <div className='text__input-component' aria-placeholder={placeholder}>
             { label && <InputLabel name={name} label={label} /> }
@@ -26,7 +38,7 @@ export const TextInput: React.FC<Props> = ({ label, value, onChange, customStyle
                 type={'type'}
                 value={value}
                 name={name}
-                onChange={onChange}
+                onChange={__onChange}
                 placeholder={placeholder}
                 className={ customStyle ? customStyle : ``}
                 data-testid="text--input" />

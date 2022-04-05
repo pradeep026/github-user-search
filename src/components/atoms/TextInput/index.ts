@@ -1,6 +1,6 @@
 
 /**
- * TextInput component for form input field
+ * @Component TextInput
  *
  * Usage of TextInput component
  *
@@ -8,7 +8,7 @@
  *  <TextInput
  *      name={`firstName}
  *      label={'First Name'}
- *      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+ *      onValueChange={(event: React.ChangeEvent<HTMLInputElement>) => {
  *          // Get the input value from `event.target.value`
  *      }}
  *      />

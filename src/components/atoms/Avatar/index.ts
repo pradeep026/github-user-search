@@ -2,7 +2,9 @@
  * @Component - Avatar
  *
  * Usage
- *  <Avatar />
+ * ```
+ *  <Avatar url={`... image url`} alt={`Alt text`}/>
+ * ```
  */
 
 export * from './Avatar';

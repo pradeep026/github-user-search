@@ -1,6 +1,6 @@
 
 /**
- * Button component for form input field
+ * @Component - Button
  *
  * Usage of Button component
  *

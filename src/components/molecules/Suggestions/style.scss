@@ -1,0 +1,22 @@
+.search__result-list {
+    position: relative;
+
+    .list__item {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 0.5px solid grey;
+        img {
+            width: 2.5rem;
+        }
+        p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    }
+
+    .no__result {
+        font-size: 0.875rem;
+    }
+}

@@ -3,6 +3,7 @@
  * SimpleList component for form input field
  *
  * Usage of SimpleList component
+ * SimpleList accepts any kind (Generic Type) of array as data.
  *
  * ```
  *  <SimpleList

@@ -4,7 +4,7 @@ import { Button } from './index';
 
 describe(`Tests Button component`, () => {
 
-    it(`renders Button component`, () => {
+    it(`it renders`, () => {
         render(<Button label='Button' />);
     });
 

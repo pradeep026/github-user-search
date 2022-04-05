@@ -4,24 +4,44 @@ import { TextInput } from './index';
 
 describe(`Tests TextInput component`, () => {
 
-    it(`TextInput component renders`, () => {
+    it(`it renders`, () => {
         let onChangeCallbackFn = jest.fn();
-        render(<TextInput
+        const placeholderText = `Please enter a value`;
+        const { getByPlaceholderText } = render(<TextInput
                 label={'Test'}
-                value=""
+                placeholder={placeholderText}
                 onChange={onChangeCallbackFn} />);
+        expect(getByPlaceholderText(placeholderText)).toBeInTheDocument();
     });
 
-    it(`Component renders input field with value`, () => {
+    it(`TextInput does not render label when is not passed as prop`, () => {
+        const placeholderText = `Please enter a value`;
+        const { queryByTestId } = render(<TextInput placeholder={placeholderText} />);
+        expect(queryByTestId(`textinput--label`)).not.toBeInTheDocument();
+    });
+
+    it(`Assert customStyle prop`, () => {
+        const placeholderText = `Please enter a value`;
+        const { getByPlaceholderText } = render(
+            <TextInput
+                placeholder={placeholderText}
+                customStyle={'custom__input'}/>
+        );
+        expect(getByPlaceholderText(placeholderText)).toHaveClass(`custom__input`);
+    });
+
+    it(`Assert TextInput value and change event`, () => {
         let onChangeCallbackFn = jest.fn();
         let inputValue = `Test`;
-        let { getByTestId } = render(
+        let { getByLabelText, getByTestId } = render(
             <TextInput
                 label={'Test'}
+                name={`test`}
                 value={inputValue}
                 onChange={onChangeCallbackFn} />
         );
-        let textInputHtmlElement =  getByTestId(`text--input`);
+        let textInputHtmlElement = getByTestId(`text--input`);
+        expect(getByLabelText(/Test/i)).toHaveAttribute(`for`, `test`);
         expect((textInputHtmlElement as HTMLInputElement).value).toEqual(inputValue);
 
         // assert input value change event

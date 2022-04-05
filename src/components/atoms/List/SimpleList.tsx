@@ -31,9 +31,7 @@ export const SimpleList = <T extends unknown>({ data, renderItem, onSelectItem }
                             role={'listitem'}
                             key={index}
                             onClick={() => {
-                                if (typeof onSelectItem === `function`) {
-                                    onSelectItem(item, index);
-                                }
+                                typeof onSelectItem === `function` && onSelectItem(item, index);
                             }}>
                             {renderItem(item, index)}
                         </li>

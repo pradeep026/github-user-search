@@ -1,10 +1,12 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AppRouter from '../router';
 
 const App: React.FC = () => {
   return (
-    <div>
-      <h1>A web app to check users public repo list using Github api</h1>
-    </div>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   );
 };
 

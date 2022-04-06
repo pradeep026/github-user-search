@@ -1,5 +1,5 @@
 
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export class Network {
     private axiosInstance: AxiosInstance | undefined;
@@ -24,11 +24,14 @@ export class Network {
             });
             return response.data;
         } catch (error) {
+            if(axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message)
+            }
             throw error;
         }
     }
 
-    public static isAxiosError(error: unknown | Error) {
+    public static isAxiosError(error: any): error is AxiosError {
         return axios.isAxiosError(error);
     }
 }

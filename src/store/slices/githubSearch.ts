@@ -36,6 +36,7 @@ export const githubUserSearchSlice = createSlice({
         });
         builder.addCase(queryAllUsersByQueryString.rejected, (state, { error }) => {
             state.loading = false;
+            state.queryResultOrSessions = [];
             state.error = (error as unknown as Error).message;
         });
     },

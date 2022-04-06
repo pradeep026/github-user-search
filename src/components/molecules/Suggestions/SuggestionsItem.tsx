@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar } from '../../atoms/Avatar';
 import { GithubUser } from '../../../api';
+import { Flex } from '../../atoms';
 interface Props {
 
     item: GithubUser;
@@ -8,9 +9,9 @@ interface Props {
 
 export const SuggestionsItem: React.FC<Props> = React.memo(({ item }) => {
     return (
-        <a className='list__item' role={'link'}>
+        <Flex tag='a' className='list__item' role={'link'}>
             <Avatar url={item?.avatar_url} alt={item.login} />
             <p>{item.login}</p>
-        </a>
+        </Flex>
     );
 });

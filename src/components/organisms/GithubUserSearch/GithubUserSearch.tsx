@@ -5,6 +5,7 @@ import { useDebounce } from '../../../hooks';
 import { DEBOUNCE_TIME } from '../../../constants';
 import { queryAllUsersByQueryString, RootState, useAppDispatch, useAppSelector } from '../../../store';
 import './style.scss';
+import { Flex } from '../../atoms';
 
 export const GithubUserSearch: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>(``);
@@ -31,7 +32,7 @@ export const GithubUserSearch: React.FC = () => {
     );
 
     return (
-        <div className='github__user-search'>
+        <Flex tag={`div`} direction={`column`} className='github__user-search'>
             <div className='search__container'>
                 <Search
                     placeholder='Search a github user name'
@@ -43,6 +44,6 @@ export const GithubUserSearch: React.FC = () => {
                     onSelectItem={__onSelectGithubUser}
                     />
             </div>
-        </div>
+        </Flex>
     );
 };

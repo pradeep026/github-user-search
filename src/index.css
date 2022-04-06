@@ -3,10 +3,12 @@
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 
   /* Color variables */
+  --color-background: #F4F4F4;
+  --color-list-hover: #DEEFF7;
   --color-text: #353535;
   --color-success: #91C878;
   --color-error: #F00000;
-  --color-border: #B4B4B4;
+  --color-border: #EFEFEF;
   --color-dark: #000000;
   --color-light: #FFFFFF;
 
@@ -14,16 +16,31 @@
   --fs-large: 2rem; /* equals to 32px */
   --fs-base: 1.5rem; /* equals to 16px */
   --fs-medium: 1rem; /* equals to 14px */
-  --fs-small: 0.75rem; /* equals to 12px */
+  --fs-small: 0.875rem; /* equals to 12px */
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+html {
+  box-sizing: border-box;
+  min-width: 100vw;
 }
 
 body {
-  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  scroll-behavior: smooth;
   color: var(--color-text);
   font-size: var(--fs-base);
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  margin: 0;
+  padding: 0;
 }
 
 /* Reset default styles */

@@ -1,24 +1,29 @@
 import React, { useCallback } from 'react';
-import { assertIsFunction } from '../../../utils';
 import { SimpleList } from '../../atoms';
-import { SuggestionsItem, SuggestionItem } from './SuggestionsItem';
-
+import { SuggestionsItem } from './SuggestionsItem';
+import { assertIsFunction } from '../../../utils';
+import { GithubUser } from '../../../api';
 import './style.scss';
-
 interface Props {
     /**
      * Array of auto suggestion - github user search list
      */
-    data?: SuggestionItem[];
+    data?: GithubUser[];
 
-    onSelectItem?: (item: SuggestionItem) => void
+    onSelectItem?: (item: GithubUser) => void
 }
+
+const NoResultState: React.FC = () => {
+    return (
+        <p className='no__result'>No Suggestions</p>
+    );
+};
 
 export const Suggestions: React.FC<Props> = React.memo(({ data, onSelectItem }) => {
     const hasSuggestion = Array.isArray(data) && data?.length > 0;
 
     const __onSelectItem = useCallback(
-        (selectedItem: SuggestionItem) => {
+        (selectedItem: GithubUser) => {
             assertIsFunction(onSelectItem) &&
                 onSelectItem(selectedItem);
         },
@@ -31,12 +36,12 @@ export const Suggestions: React.FC<Props> = React.memo(({ data, onSelectItem }) 
                 (
                     <SimpleList
                         data={data}
-                        renderItem={(item) => (
-                            <SuggestionsItem item={item} />
+                        renderItem={(item, index) => (
+                            <SuggestionsItem key={index} item={item} />
                         )}
                         onSelectItem={__onSelectItem} />
                 ) : (
-                    <p className='no__result'>No Suggestions</p>
+                    <NoResultState />
                 )
             }
         </div>

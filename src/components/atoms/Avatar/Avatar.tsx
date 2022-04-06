@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 type Props = {
 
     /**
      * Avatar url to load in img tag
      */
-    url: string;
+    url?: string;
 
     /**
      * alt - content to be used with atl attribute

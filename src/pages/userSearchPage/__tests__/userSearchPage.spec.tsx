@@ -2,10 +2,9 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { Provider } from 'react-redux';
+import App from '../../../app/App';
 import { store } from '../../../store';
 import { ApiUrls } from '../../../api';
-import App from '../../../app/App';
-import { UserSearchPage } from '..';
 
 const sleep = () => new Promise(resolve => {
     setTimeout(resolve, 1000);
@@ -32,11 +31,7 @@ afterAll(() => server.close())
 describe(`Integration Testing - Github user search`, () => {
     
     it(`Assert initial screen renders`, async () => {
-        render(
-            <Provider store={store}>
-              <UserSearchPage />
-            </Provider>
-        );
+        render(<App />);
         await act(async () => {
             expect(screen.queryByText(/No Suggestions/i)).toBeInTheDocument();
             expect(screen.queryByRole('list')).not.toBeInTheDocument();
@@ -45,11 +40,7 @@ describe(`Integration Testing - Github user search`, () => {
     });
     
     it(`Assert when search query is entered`, async () => {
-        render(
-            <Provider store={store}>
-              <UserSearchPage />
-            </Provider>
-        );
+        render(<App />);
         let searchText = `test`;
         fireEvent.change(screen.getByPlaceholderText(/Search/i), { target: { value: searchText }});
         expect((screen.getByPlaceholderText(/Search/i) as HTMLInputElement)).toHaveValue(searchText);
@@ -67,8 +58,5 @@ describe(`Integration Testing - Github user search`, () => {
             expect(screen.queryAllByRole(`listitem`)).toHaveLength(3);
             fireEvent.click(screen.queryAllByRole(`listitem`)[0]);
         });
-        // Clear search input
-        fireEvent.change(screen.getByPlaceholderText(/Search/i), { target: { value: `` }});
-        expect((screen.getByPlaceholderText(/Search/i) as HTMLInputElement)).toHaveValue(``);
     });
 });

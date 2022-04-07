@@ -1,13 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Search } from '../../molecules/Search';
 import { Suggestions } from '../../molecules/Suggestions';
+import { Flex } from '../../atoms';
 import { useDebounce } from '../../../hooks';
 import { DEBOUNCE_TIME } from '../../../constants';
 import { queryAllUsersByQueryString, RootState, useAppDispatch, useAppSelector } from '../../../store';
 import './style.scss';
-import { Flex } from '../../atoms';
+import { GithubUser } from '../../../api';
 
-export const GithubUserSearch: React.FC = () => {
+
+type Props = {
+    goToUserProfile: (githubLoginId: string) => void;
+}
+
+export const GithubUserSearch: React.FC<Props> = ({ goToUserProfile }) => {
     const [searchQuery, setSearchQuery] = useState<string>(``);
     const debounceSearchQuery = useDebounce(searchQuery, DEBOUNCE_TIME);
     const githubUserSearch = useAppSelector((store: RootState) => store.githubUserSearch);
@@ -25,8 +31,8 @@ export const GithubUserSearch: React.FC = () => {
     };
 
     const __onSelectGithubUser = useCallback(
-        (selectedUser) => {
-            console.log(`---- selected github user -- `, selectedUser);
+        (selectedUser: GithubUser) => {
+            goToUserProfile(selectedUser.login);
         },
         [],
     );

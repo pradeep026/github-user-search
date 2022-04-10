@@ -3,7 +3,7 @@
   "incomplete_results": false,
   "items": [
     {
-      "login": "test-user1",
+      "login": "test-123",
       "id": 150330,
       "node_id": "MDQ6VXNlcjE1MDMzMA==",
       "avatar_url": "https://avatars.githubusercontent.com/u/150330?v=4",
@@ -13,7 +13,7 @@
       "score": 1.0
     },
     {
-      "login": "test-user2",
+      "login": "demo-user",
       "id": 12171330,
       "node_id": "MDQ6VXNlcjEyMTcxMzMw",
       "avatar_url": "https://avatars.githubusercontent.com/u/12171330?v=4",
@@ -23,7 +23,7 @@
       "score": 1.0
     },
     {
-      "login": "test-user3",
+      "login": "test",
       "id": 70465763,
       "node_id": "MDQ6VXNlcjcwNDY1NzYz",
       "avatar_url": "https://avatars.githubusercontent.com/u/70465763?v=4",

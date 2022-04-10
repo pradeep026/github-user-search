@@ -15,6 +15,7 @@ export const Profile: React.FC<Props> = React.memo(({ profile }) => {
                 <p className='bio__data'>{profile?.bio}</p>
                 <a
                     role={'link'}
+                    data-testid={`loginid`}
                     href={profile?.html_url ?? ``}
                     className={`github__login-id`}
                     target={`_blank`}>

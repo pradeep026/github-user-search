@@ -148,7 +148,7 @@ export interface GitRepoTreeState {
     /**
      * README.md content file url
      */
-    readmeFileUrl: string;
+    readmeFile?: GitFileTree | null;
 
     /**
      * Error message when the api request is failed or empty repo is returned

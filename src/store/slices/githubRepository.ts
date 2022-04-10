@@ -4,7 +4,7 @@ import { GithubRepoTreeResponse, GitRepoTreeState } from './types';
 
 export const initialState: GitRepoTreeState = {
     githubRepoTree: [],
-    readmeFileUrl: ``,
+    readmeFile: null,
     error: null,
 };
 
@@ -46,12 +46,13 @@ export const githubRepositorySlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchAllFileByRepoName.fulfilled, (state, { payload }) => {
             state.githubRepoTree = payload.tree ?? [];
-            const readmeFileItem =  payload.tree.find(({ path }) =>
+            const readmeFileItem =  payload.tree?.find(({ path }) =>
                 `${path}`.toLocaleLowerCase() === `readme.md`);
-            state.readmeFileUrl = readmeFileItem?.url ?? ``;
+            state.readmeFile = readmeFileItem;
         });
         builder.addCase(fetchAllFileByRepoName.rejected, (state, { error }) => {
             state.githubRepoTree = [];
+            state.readmeFile = null;
             state.error = (error as unknown as Error).message;
         });
     },

@@ -8,11 +8,11 @@ describe(`Integration Testing - User Profile and Repositories`, () => {
     it(`Assert initial screen renders`, async () => {
         const path = RoutePaths
                         .UserProfile
-                        .replace(`:id`, `test-user`)
-                        .replace(`:name`, `test-repo`);
+                        .replace(`:id`, `test-123`)
+                        .replace(`:name`, `react-demo-app`);
         renderPageUtils(path);
         await waitFor(async () => {
-            expect(screen.queryByText(/test-123/i)).toBeInTheDocument();
+            expect(screen.getByTestId(`loginid`)).toBeInTheDocument();
         });
     });
 });

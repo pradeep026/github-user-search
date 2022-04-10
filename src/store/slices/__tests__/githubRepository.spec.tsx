@@ -8,12 +8,9 @@ import {
 import githubRepositoryReducer, { initialState, fetchAllFileByRepoName } from '../githubRepository';
 import { store } from '../..';
 import { RoutePaths } from '../../../router';
+import { act } from 'react-dom/test-utils';
 
 const server = setupMockServer();
-
-beforeAll(() => {
-    renderPageUtils(RoutePaths.RepositoryInfoPage);
-});
 
 describe(`Tests githubRepositoryReducer`, () => {
 
@@ -42,11 +39,13 @@ describe(`Tests githubRepositoryReducer`, () => {
                 );
             }),
         );
-        store.dispatch(fetchAllFileByRepoName({
-            loginId: `test-123`,
-            repoName: `react-demo-app`,
-            defaultBranch: `main`
-        }));
+        await act(async () => {
+            await store.dispatch(fetchAllFileByRepoName({
+                loginId: `test-123`,
+                repoName: `react-demo-app`,
+                defaultBranch: `main`
+            }));
+        })
         await waitFor(async () => {
             expect(store.getState().githubRepository.githubRepoTree).toHaveLength(0);
         });

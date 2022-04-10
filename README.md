@@ -1,6 +1,13 @@
 # Github User's public repositories
 
 A simple web application to search and view Github user's public repositories. This application is writtern using React + Typescript
+
+# Features
+    - Search a user by github user name
+    - Show Profile information and user's public repositories list
+    - Show list of files in a selected repository with pagination
+    - Display README.md file content
+    - Add unit and integration test with mock test data
 ## Available Scripts
 
 In the project directory, you can run:
@@ -9,15 +16,12 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Run unit tests
+### `npm run test:coverage`
 
+Run unit test and generates test coverage report
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\

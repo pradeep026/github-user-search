@@ -1,0 +1,35 @@
+.profile__component {
+    position: relative;
+    flex: 1;
+    gap: 1rem;
+    padding: 0 2rem;
+    .full__name {
+        font-size: var(--fs-large);
+        margin: 0.5rem 0;
+        color: var(--color-dark);
+    }
+    .bio__data {
+        font-size: var(--fs-medium);
+        margin: 0.5rem 0;
+    }
+    .github__login-id {
+        font-size: var(--fs-medium);
+        color: var(--color-success);
+        text-decoration: none;
+        padding-bottom: 1rem;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    .insights {
+        gap: 1rem;
+        label {
+            font-size: var(--fs-medium);
+            padding-bottom: 0.25rem;
+        }
+        span {
+            font-size: var(--fs-small);
+        }
+    }
+}

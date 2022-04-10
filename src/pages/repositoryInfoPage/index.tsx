@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { Flex } from '../../components/atoms';
 import { PaginatedList } from '../../components/molecules/PaginatedList';
 import { ReadMeContent } from '../../components/molecules/ReadMeContent';
-import { useAppDispatch, useAppSelector } from '../../store';
+import { RootState, useAppDispatch, useAppSelector } from '../../store';
 import { fetchAllFileByRepoName } from '../../store/slices/githubRepository';
 import './style.scss';
 
@@ -15,7 +15,7 @@ export const RepositoryInfoPage: React.FC = () => {
     const params = useParams();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const githubRepository = useAppSelector((state) => state?.githubRepository);
+    const githubRepository = useAppSelector((state: RootState) => state?.githubRepository);
     const state = location.state as LocationState;
 
     useEffect(() => {
@@ -45,13 +45,13 @@ export const RepositoryInfoPage: React.FC = () => {
                 </Flex>
             </div>
             <Flex>
-                <div style={{ flex: 1}}>
+                <div className='flex__1'>
                     <PaginatedList
                         data={githubRepository?.githubRepoTree ?? []}
                         pageSize={50}
                         renderItem={(treeItem, index) => {
                             return (
-                                <div key={index} style={{fontSize: `12px`}}>
+                                <div key={index} className={`git__file-tree`}>
                                     {treeItem.path}
                                 </div>
                             );
@@ -60,8 +60,11 @@ export const RepositoryInfoPage: React.FC = () => {
 
                         }} />
                 </div>
-                <div style={{ flex: 1}}>
-                    <ReadMeContent contentUrl={githubRepository?.readmeFileUrl}/>
+                <div className='flex__1'>
+                    <ReadMeContent
+                        loginid={params?.id ?? ``}
+                        repository={params?.name ?? ``}
+                        sha={githubRepository?.readmeFile?.sha ?? ``} />
                 </div>
             </Flex>
         </Flex>

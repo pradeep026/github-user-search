@@ -3,6 +3,10 @@
     min-height: 100vh;
     font-size: var(--fs-medium);
 
+    .flex__1  {
+        flex: 1;
+    }
+
     .repo__info {
         padding: 1rem;
     }
@@ -14,5 +18,8 @@
     .repositories__list {
         width: 100%;
         margin-top: 14rem;
+    }
+    .git__file-tree {
+        font-size: var(--fs-medium);
     }
 }

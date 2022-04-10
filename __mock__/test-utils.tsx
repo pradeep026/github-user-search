@@ -37,6 +37,13 @@ const apiHandlers = [
             ctx.json(require(`./git_files_tree_response.json`)),
         )
     }),
+    rest.get(`/repos/:loginid/:repo/git/blobs/:sha`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.delay(200),
+            ctx.json(require(`./readme_response.json`)),
+        );
+    }),
 ];
 
 export const setupMockServer = () => {

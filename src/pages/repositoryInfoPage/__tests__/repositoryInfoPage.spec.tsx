@@ -18,7 +18,7 @@ describe(`Integration Testing - User Profile and Repositories`, () => {
     it(`Assert page renders with files count and list of files`, async () => {
         const path = RoutePaths
                         .RepositoryInfoPage
-                        .replace(`:id`, `test-user`)
+                        .replace(`:id`, `test-123`)
                         .replace(`:name`, `react-demo-app`)
         renderPageUtils(path);
         await act(() => {

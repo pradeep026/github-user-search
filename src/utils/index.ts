@@ -1,3 +1,6 @@
+// export date utils
+export * from './DateUtils';
+
 /**
  * Type gaurd function - Assert function to check the type of argument.
  * Throws `TypeError` if the argument is not a function

@@ -4,31 +4,29 @@ import { Repository, UserProfile, UserProfileState } from './types';
 
 export const initialState: UserProfileState = {
     profile: null,
+    error: null,
     listOfGitRepositories: [],
 };
 
-export const fetchUserProfileByLoginId = createAsyncThunk(
-    'users/profile', async (loginid?: string) => {
-    try {
-        const url = Network.buildUrlWithPathParams(ApiUrls.Users.Profile, `loginid`, `${loginid}`);
-        const response = await new Network()
-            .makeGetRequest<string, UserProfile>({ url });
-        return response;
-    } catch (error) {
-        throw error;
-    }
-});
-
-export const fetchRepositoriesByLoginId = createAsyncThunk(
-    'users/githubRepositories', async (loginid?: string) => {
-    try {
-        const url = Network.buildUrlWithPathParams(ApiUrls.Users.Repositories, `loginid`, `${loginid}`);
-        const response = await new Network()
-            .makeGetRequest<string, Repository[]>({ url });
-        return response;
-    } catch (error) {
-        throw error;
-    }
+export const fetchUserProfileAndPublicReposByLoginId = createAsyncThunk('users/profileAndRespose',
+    async (loginid: string): Promise<{ profileResult: UserProfile; repositoriesResult: Repository[] }> => {
+        const options = [
+            {   key: `loginid`, value: loginid },
+        ];
+        const profileRequestUrl = Network.buildUrlWithPathParams(ApiUrls.Users.Profile, options);
+        const repositoriesRequestUrl = Network.buildUrlWithPathParams(ApiUrls.Users.Repositories, options);
+        try {
+            const profileResult: UserProfile = await new Network()
+                            .makeGetRequest<string, UserProfile>({ url: profileRequestUrl });
+            const repositoriesResult: Repository[] = await new Network()
+                                .makeGetRequest<string, Repository[]>({ url: repositoriesRequestUrl });
+            return {
+                profileResult,
+                repositoriesResult,
+            };
+        } catch (error) {
+            throw error;
+        }
 });
 
 export const userProfileSlice = createSlice({
@@ -37,19 +35,18 @@ export const userProfileSlice = createSlice({
     reducers: {
     },
     extraReducers: (builder) => {
-        // Builder Case for Fetch Github User Profile
-        builder.addCase(fetchUserProfileByLoginId.fulfilled, (state, { payload }) => {
-            state.profile = payload;
-        });
-        builder.addCase(fetchUserProfileByLoginId.rejected, (state, { error }) => {
-            state.profile = null;
-        });
-        // Builder Case for Fetch Github Repositories
-        builder.addCase(fetchRepositoriesByLoginId.fulfilled, (state, { payload }) => {
-            state.listOfGitRepositories = payload;
-        });
-        builder.addCase(fetchRepositoriesByLoginId.rejected, (state, { error }) => {
+        builder.addCase(fetchUserProfileAndPublicReposByLoginId.pending, (state) => {
             state.listOfGitRepositories = [];
+        });
+        builder.addCase(fetchUserProfileAndPublicReposByLoginId.fulfilled, (state, { payload }) => {
+            // const [profileSettleResult, repositorySettleResult] = payload;
+            state.profile = payload.profileResult ?? null;
+            state.listOfGitRepositories = payload.repositoriesResult ?? null;
+        });
+        builder.addCase(fetchUserProfileAndPublicReposByLoginId.rejected, (state, { error }) => {
+            state.profile = null;
+            state.listOfGitRepositories = [];
+            state.error = error?.message;
         });
     },
 });

@@ -2,7 +2,6 @@ import { ApiUrls } from '../../../api';
 import {
     renderPageUtils,
     setupMockServer,
-    render,
     waitFor,
     rest,
 } from '../../../../__mock__/test-utils';

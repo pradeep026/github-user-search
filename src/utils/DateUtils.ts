@@ -8,7 +8,7 @@ export const DateUtils = {
         return new Intl.DateTimeFormat(`en-US`, { dateStyle: 'medium', timeStyle: 'medium' });
     },
     format(date?: number | Date | undefined) {
-        if(!date || Number.isNaN(Date.parse(`${date}`))) {
+        if (!date || Number.isNaN(Date.parse(`${date}`))) {
             throw new RangeError(`${date}`);
         }
         return this.formatter?.format(date);

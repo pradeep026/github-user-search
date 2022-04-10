@@ -115,7 +115,12 @@ export interface UserProfileState {
      /**
       * List of public github repositories by user
       */
-     listOfGitRepositories: Repository[]
+     listOfGitRepositories: Repository[];
+
+     /**
+      * List of error messages
+      */
+     error: string | undefined | null;
 }
 
 // Git Repository Files API reponse
@@ -139,5 +144,10 @@ export interface GitRepoTreeState {
      * All files in the git repo
      */
     githubRepoTree?: GitFileTree[];
+
+    /**
+     * Error message when the api request is failed or empty repo is returned
+     */
+    error: string | undefined | null;
 }
 

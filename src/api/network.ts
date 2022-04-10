@@ -1,6 +1,11 @@
 
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
+export type BuildPathParamOption = {
+    key: string;
+    value: string;
+};
+
 export class Network {
     private axiosInstance: AxiosInstance | undefined;
 
@@ -25,15 +30,17 @@ export class Network {
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                throw new Error(error.response?.data?.message);
+                throw new Error(error?.response?.data?.message);
             }
             throw error;
         }
     }
 
-    public static buildUrlWithPathParams(path: string, key: string, pathParam: string): string {
-        if (!key || !pathParam) return path;
-        return `${path}`.replace(`:${key}`, pathParam);
+    public static buildUrlWithPathParams(path: string, options: BuildPathParamOption[]): string {
+        if (options.length === 0 ) return path;
+        return options.reduce((acc, option) => {
+            return `${acc}`.replace(`:${option.key}`, option.value);
+        }, path);
     }
 
     public static isAxiosError(error: any): error is AxiosError {

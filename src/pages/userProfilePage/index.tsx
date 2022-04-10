@@ -4,7 +4,7 @@ import { Flex } from '../../components/atoms';
 import { GithubRepositories } from '../../components/organisms/GithubRepositories';
 import { GithubUserProfile } from '../../components/organisms/GithubUserProfile';
 import { Repository, RootState, useAppDispatch, useAppSelector } from '../../store';
-import { fetchRepositoriesByLoginId, fetchUserProfileByLoginId } from '../../store/slices/userProfile';
+import { fetchUserProfileAndPublicReposByLoginId } from '../../store/slices/userProfile';
 import './style.scss';
 
 export const UserProfilePage: React.FC = () => {
@@ -14,9 +14,9 @@ export const UserProfilePage: React.FC = () => {
     const githubUser = useAppSelector((state: RootState) => state?.user);
 
     useEffect(() => {
-        console.log(`----- params.id ${params.id}`);
-        dispatch(fetchUserProfileByLoginId(params.id));
-        dispatch(fetchRepositoriesByLoginId(params.id));
+        if (params.id) {
+            dispatch(fetchUserProfileAndPublicReposByLoginId(params.id));
+        }
     }, []);
 
     const __goToRepositoryDetail = useCallback(

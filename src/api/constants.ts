@@ -6,5 +6,6 @@ export const ApiUrls = {
     Users: {
         Profile: `/users/:loginid`,
         Repositories: `/users/:loginid/repos`,
+        RepositoryGitTree: `/repos/:loginid/:repository/git/trees/:branch`,
     },
 } as const;

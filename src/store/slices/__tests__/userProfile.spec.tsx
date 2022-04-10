@@ -3,7 +3,7 @@ import { store } from '../../index';
 import { ApiUrls } from '../../../api';
 import { setupMockServer, waitFor } from '../../../../__mock__/test-utils';
 import userProfileReducer, {
-    initialState, fetchUserProfileByLoginId, fetchRepositoriesByLoginId
+    initialState, fetchUserProfileAndPublicReposByLoginId
 } from '../userProfile';
 
 const server = setupMockServer();
@@ -16,8 +16,7 @@ describe(`Tests userProfile reducer`, () => {
     });
     
     it(`Assert async action - `, async () => {
-        store.dispatch(fetchUserProfileByLoginId(`test-123`));
-        store.dispatch(fetchRepositoriesByLoginId(`test-123`));
+        store.dispatch(fetchUserProfileAndPublicReposByLoginId(`test-123`));
         await waitFor(async () => {
             const state = await store.getState();
             expect(state.user.profile?.login).not.toBeNull();
@@ -29,19 +28,18 @@ describe(`Tests userProfile reducer`, () => {
         server.use(
             rest.get(ApiUrls.Users.Profile, (_, res, ctx) => {
                 return res(
-                    ctx.status(404),
-                    ctx.json({ message: `Not Found` }),
+                    ctx.status(410),
+                    ctx.text(`Not Found`),
                 );
             }),
             rest.get(ApiUrls.Users.Repositories, (_, res, ctx) => {
                 return res(
-                    ctx.status(404),
-                    ctx.json({ message: `Not Found` }),
+                    ctx.status(410),
+                    ctx.text(`Not Found`),
                 );
             }),
         );
-        store.dispatch(fetchUserProfileByLoginId(`test-123`));
-        store.dispatch(fetchRepositoriesByLoginId(`test-123`));
+        store.dispatch(fetchUserProfileAndPublicReposByLoginId(`test-123`));
         await waitFor(async() => {
             const state = await store.getState();
             expect(state.user.profile).toBeNull();

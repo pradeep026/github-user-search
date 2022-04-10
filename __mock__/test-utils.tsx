@@ -30,6 +30,13 @@ const apiHandlers = [
             ctx.json(require(`./user_repos_response.json`)),
         )
     }),
+    rest.get(ApiUrls.Users.RepositoryGitTree, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.delay(200),
+            ctx.json(require(`./git_files_tree_response.json`)),
+        )
+    }),
 ];
 
 export const setupMockServer = () => {

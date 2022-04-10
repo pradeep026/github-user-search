@@ -1,0 +1,18 @@
+.repo__tree-page {
+    width: 100%;
+    min-height: 100vh;
+    font-size: var(--fs-medium);
+
+    .repo__info {
+        padding: 1rem;
+    }
+
+    .pagination__container {
+        position: fixed;
+    }
+
+    .repositories__list {
+        width: 100%;
+        margin-top: 14rem;
+    }
+}

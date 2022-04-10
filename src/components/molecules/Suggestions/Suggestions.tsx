@@ -2,7 +2,8 @@ import React, { useCallback } from 'react';
 import { SimpleList } from '../../atoms';
 import { SuggestionsItem } from './SuggestionsItem';
 import { assertIsFunction } from '../../../utils';
-import { GithubUser } from '../../../api';
+import { GithubUser } from '../../../store';
+
 import './style.scss';
 interface Props {
     /**

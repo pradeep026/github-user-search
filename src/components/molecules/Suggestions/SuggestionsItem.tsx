@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar } from '../../atoms/Avatar';
-import { GithubUser } from '../../../api';
 import { Flex } from '../../atoms';
+import { GithubUser } from '../../../store';
 interface Props {
 
     item: GithubUser;

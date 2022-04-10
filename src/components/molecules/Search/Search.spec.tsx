@@ -1,5 +1,5 @@
 import React from 'react';
-import { createEvent, fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { Search } from './index';
 
 describe(`Tests Search component`, () => {

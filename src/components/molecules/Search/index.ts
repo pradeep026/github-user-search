@@ -1,14 +1,13 @@
 
 /**
- * Suggestions component for form input field
+ * @Component Search
  *
  * Usage of Suggestions component
  *
+ * Component accespts `TextInputProps` as props
+ *
  * ```
- *  <TextInput
- *      type={`text`}
- *      label={'First Name'}
- *      />
+ *  <Search />
  * ```
  */
 

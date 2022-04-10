@@ -1,14 +1,13 @@
 
 /**
- * Suggestions component for form input field
+ * @Component Suggestions
  *
  * Usage of Suggestions component
  *
  * ```
- *  <TextInput
- *      type={`text`}
- *      label={'First Name'}
- *      />
+ *  <Suggestions
+ *      data={data}
+ *      onSelectItem={onSelectItemCallbackFn} />
  * ```
  */
 

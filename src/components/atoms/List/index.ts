@@ -17,3 +17,4 @@
  */
 
  export { SimpleList } from './SimpleList';
+ export type { SimpleListComponentProps } from './SimpleList';

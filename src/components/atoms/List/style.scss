@@ -1,4 +1,8 @@
 .simple__list-component {
     list-style: none;
     padding-right: 1.5rem;
+
+    li {
+        flex: 1;
+    }
 }

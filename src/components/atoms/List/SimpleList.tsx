@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import './style.scss';
-interface Props<T> {
+export interface SimpleListComponentProps<T> {
     /**
      *  data to rendered as list
      */
@@ -18,7 +18,7 @@ interface Props<T> {
     onSelectItem?: (item: T, index: number) => void;
 }
 
-export const SimpleList = <T extends unknown>({ data, renderItem, onSelectItem }: Props<T>) => {
+export const SimpleList = <T extends unknown>({ data, renderItem, onSelectItem }: SimpleListComponentProps<T>) => {
     return (
         <ul
             role={'list'}

@@ -10,11 +10,15 @@ describe(`Tests Button component`, () => {
 
     it(`Button component renders with label`, () => {
         const onClickCallbackFn = jest.fn();
-        const { getByText } = render(<Button label='My Button' onClick={onClickCallbackFn} />);
-        const buttonHtmlElement = getByText(/My Button/i);
+        const { getByText } = render(<Button
+                label='My Button'
+                customStyle={`btn__primary`}
+                onClick={onClickCallbackFn} />);
+        const buttonHtmlElement = getByText(/My Button/i) as HTMLButtonElement;
         expect(buttonHtmlElement).toBeInTheDocument();
         expect(buttonHtmlElement).toBeEnabled();
         fireEvent.click(buttonHtmlElement);
+        expect(buttonHtmlElement).toHaveClass(`btn__primary`);
         // Assert onClick callback fn should be called
         expect(onClickCallbackFn).toHaveBeenCalled();
     });

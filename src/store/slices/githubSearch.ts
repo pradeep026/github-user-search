@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ApiUrls, GithubUserQueryResponse, Network } from '../../api';
-import { GithubSearchState } from './types';
+import { ApiUrls, Network } from '../../api';
+import { GithubSearchState, GithubUserQueryResponse } from './types';
 
 export const initialState: GithubSearchState = {
     loading: false,
@@ -41,7 +41,5 @@ export const githubUserSearchSlice = createSlice({
         });
     },
 });
-
-export const { } = githubUserSearchSlice.actions;
 
 export default githubUserSearchSlice.reducer;

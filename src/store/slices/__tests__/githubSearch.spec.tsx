@@ -1,29 +1,19 @@
-import { render, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
-import { Provider } from 'react-redux';
-import { store } from '../..';
 import { ApiUrls } from '../../../api';
-import App from '../../../app/App';
+import {
+    renderPageUtils,
+    setupMockServer,
+    render,
+    waitFor,
+    rest,
+} from '../../../../__mock__/test-utils';
 import githubSearchReducer, { initialState, queryAllUsersByQueryString } from '../githubSearch';
+import { store } from '../..';
 
-export const apiHandlers = [
-    rest.get(ApiUrls.UserSearch, (req, res, ctx) => {
-        return res(
-            ctx.status(200),
-            ctx.delay(200),
-            ctx.json(require(`../../../../__mock__/search_api_response.json`)),
-        )
-    })
-];
+const server = setupMockServer();
 
-const server = setupServer(...apiHandlers)
-
-beforeAll(() => server.listen())
-
-afterEach(() => server.resetHandlers())
-
-afterAll(() => server.close())
+beforeAll(() => {
+    renderPageUtils(`/`);
+});
 
 describe(`Tests githubSearchReducer`, () => {
 
@@ -33,11 +23,6 @@ describe(`Tests githubSearchReducer`, () => {
     });
     
     it(`Assert async action - query user search by query string invokes API request`, async () => {
-        render(
-            <Provider store={store}>
-              <App />
-            </Provider>
-        );
         await waitFor(async () => {
             expect(store.getState().githubUserSearch.loading).toBeFalsy();
             store.dispatch(queryAllUsersByQueryString(`test`));
@@ -58,11 +43,6 @@ describe(`Tests githubSearchReducer`, () => {
                     ctx.json({ message: `Validation Failed` }),
                 );
             }),
-        );
-        render(
-            <Provider store={store}>
-              <App />
-            </Provider>
         );
         await waitFor(async () => {
             expect(store.getState().githubUserSearch.loading).toBeFalsy();

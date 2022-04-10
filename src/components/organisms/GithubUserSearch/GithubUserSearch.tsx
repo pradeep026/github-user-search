@@ -4,9 +4,8 @@ import { Suggestions } from '../../molecules/Suggestions';
 import { Flex } from '../../atoms';
 import { useDebounce } from '../../../hooks';
 import { DEBOUNCE_TIME } from '../../../constants';
-import { queryAllUsersByQueryString, RootState, useAppDispatch, useAppSelector } from '../../../store';
+import { GithubUser, queryAllUsersByQueryString, RootState, useAppDispatch, useAppSelector } from '../../../store';
 import './style.scss';
-import { GithubUser } from '../../../api';
 
 
 type Props = {

@@ -13,6 +13,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "axios": "^0.26.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-markdown": "^8.0.2",
     "react-paginate": "^6.2.0",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",

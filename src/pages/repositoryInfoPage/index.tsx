@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { Flex } from '../../components/atoms';
 import { PaginatedList } from '../../components/molecules/PaginatedList';
+import { ReadMeContent } from '../../components/molecules/ReadMeContent';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { fetchAllFileByRepoName } from '../../store/slices/githubRepository';
 import './style.scss';
@@ -60,7 +61,7 @@ export const RepositoryInfoPage: React.FC = () => {
                         }} />
                 </div>
                 <div style={{ flex: 1}}>
-                    README.md file
+                    <ReadMeContent contentUrl={githubRepository?.readmeFileUrl}/>
                 </div>
             </Flex>
         </Flex>

@@ -146,6 +146,11 @@ export interface GitRepoTreeState {
     githubRepoTree?: GitFileTree[];
 
     /**
+     * README.md content file url
+     */
+    readmeFileUrl: string;
+
+    /**
      * Error message when the api request is failed or empty repo is returned
      */
     error: string | undefined | null;

@@ -24,11 +24,16 @@ export class Network {
             });
             return response.data;
         } catch (error) {
-            if(axios.isAxiosError(error)) {
-                throw new Error(error.response?.data?.message)
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message);
             }
             throw error;
         }
+    }
+
+    public static buildUrlWithPathParams(path: string, key: string, pathParam: string): string {
+        if (!key || !pathParam) return path;
+        return `${path}`.replace(`:${key}`, pathParam);
     }
 
     public static isAxiosError(error: any): error is AxiosError {
